@@ -17,6 +17,7 @@ from sklearn.preprocessing import PolynomialFeatures
 from sklearn.svm import SVR
 from sklearn.pipeline import make_pipeline
 from sklearn.tree import DecisionTreeRegressor
+from sklearn.ensemble import RandomForestRegressor
 
 def preprocessor(data):
     dataset = data.values
@@ -54,12 +55,18 @@ dt_regressor = DecisionTreeRegressor(random_state=0)
 dt_regressor.fit(X, y)
 
 
+#random foreset 
+rf_regressor = RandomForestRegressor(n_estimators=10, random_state=0)
+rf_regressor.fit(X, y)
+
+
 
 #visualising linear polynomial regrssionmmodel
 plt.scatter(X, y, c='red')
 plt.plot(X, lr_regressor.predict(X), color='yellow') #comparing real salary to observation of the predicted salary
 plt.plot(X, lr_regressor2.predict(X_poly), color='green') #comparing real salary to observation of the predicted salary
 plt.plot(X, dt_regressor.predict(X), color='blue')
+plt.plot(X, rf_regressor.predict(X), color='black')
 plt.title('Salary vs Experience (Lower Resolution)')
 plt.xlabel('Level(Position)')
 plt.ylabel('Salary ($)')
@@ -73,6 +80,7 @@ plt.scatter(X, y, color='red')
 #plt.plot(X_grid, lr_regressor.predict(X_grid), color='yellow') #comparing real salary to observation of the predicted salary
 plt.plot(X, lr_regressor2.predict(X_poly), color='green') #comparing real salary to observation of the predicted salary
 plt.plot(X_grid, dt_regressor.predict(X_grid), color='blue')
+plt.plot(X_grid, rf_regressor.predict(X_grid), color='black')
 plt.title('Salary vs Experience (Higher Resolution)')
 plt.xlabel('Level(Position)')
 plt.ylabel('Salary ($)')
