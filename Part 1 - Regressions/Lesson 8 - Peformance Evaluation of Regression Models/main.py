@@ -16,5 +16,10 @@ R^2 = 1 - (sum of residuals)/(total sum of squares)
 the closer it is to 1, the better the model
 
 
-Adjusted R-Squared
+Adjusted R-Squared provides a better performance measurement compared to R-squared
+
+the closer it is to 1, the better the model
+
+
+
 '''
