@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Tue Sep  6 02:35:23 2022
+Created on Tue Sep  6 20:20:15 2022
 
 @author: jondexter
 """
@@ -10,7 +10,7 @@ import pandas  as pd
 import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
-from sklearn.linear_model import LogisticRegression
+from sklearn.neighbors import KNeighborsClassifier
 from sklearn.metrics import confusion_matrix
 import matplotlib.pyplot as plt
 from matplotlib.colors import ListedColormap
@@ -43,12 +43,11 @@ def plot_some_graph(X_test, y_test, classifier):
     for i, j in enumerate(np.unique(y_set)):
         plt.scatter(X_set[y_set == j, 0], X_set[y_set == j, 1],
                     c = ListedColormap(('red', 'green'))(i), label = j)
-    plt.title('Logistic Regression (Testset)')
+    plt.title('K-NN Regression (Test set)')
     plt.xlabel('Age')
     plt.ylabel('Estimated Salary')
     plt.legend()
     plt.show()
-    
     
     
 
@@ -58,7 +57,7 @@ X = feature_scaling(X)
 X_train, X_test, y_train, y_test = preprocess_2_split(X, y)
 
 
-classifier = LogisticRegression(random_state=0)
+classifier = KNeighborsClassifier(n_neighbors=5 )
 classifier.fit(X_train, y_train)
 
 y_pred = classifier.predict(X_test)
@@ -66,9 +65,14 @@ y_pred = classifier.predict(X_test)
 #confusion matrix
 cm = confusion_matrix(y_test, y_pred)
 
-
-#visualising the data
+#visualise
 plot_some_graph(X_test, y_test, classifier)
+
+
+
+
+
+
 
 
 
