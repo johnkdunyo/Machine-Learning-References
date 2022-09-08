@@ -11,7 +11,7 @@ import pandas  as pd
 import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
-from sklearn.tree import DecisionTreeClassifier
+from sklearn.svm import SVC
 from sklearn.metrics import confusion_matrix
 import matplotlib.pyplot as plt
 from matplotlib.colors import ListedColormap
@@ -44,7 +44,7 @@ def plot_some_graph(X_test, y_test, classifier):
     for i, j in enumerate(np.unique(y_set)):
         plt.scatter(X_set[y_set == j, 0], X_set[y_set == j, 1],
                     c = ListedColormap(('red', 'green'))(i), label = j)
-    plt.title('Decision Tree Classifier(Test set)')
+    plt.title('Kernel SVM Regression (Test set)')
     plt.xlabel('Age')
     plt.ylabel('Estimated Salary')
     plt.legend()
@@ -57,7 +57,7 @@ X, y = preprocess_1(data)
 X = feature_scaling(X)
 X_train, X_test, y_train, y_test = preprocess_2_split(X, y)
 
-classifier = DecisionTreeClassifier(criterion="entropy", random_state=0)
+classifier = SVC(kernel='rbf', random_state=0, degree=4)
 classifier.fit(X_train, y_train)
 
 y_pred = classifier.predict(X_test)
